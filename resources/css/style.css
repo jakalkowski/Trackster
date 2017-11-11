@@ -1,6 +1,7 @@
 /*
   Custom styles for Trackster App
 */
+
 html {
   font-size: 16px;
 }
@@ -49,4 +50,27 @@ body {
 
 #search-input:focus {
   outline: 0 !important;
+}
+
+/* Example row for track list */
+.track {
+  display: flex;
+  padding: .6rem;
+  border-bottom: 1px solid #cccccc;
+  line-height: 1;
+}
+
+.track div {
+  display: flex;
+  align-items: center;
+}
+
+.play-button a {
+  display: flex;
+  align-items: center;
+  color: #ff00ab;
+}
+
+a, a:hover, a:focus {
+  text-decoration: none;
 }
