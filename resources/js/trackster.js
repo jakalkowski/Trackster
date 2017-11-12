@@ -24,7 +24,9 @@ Trackster.renderTracks = function(tracks) {
 
   $("#track-list").empty();
 
-  for (i = 0; i <= tracks.length - 1; i++){
+  for (i = 0; i <= tracks.length - 1 ; i++){
+    var mediumAlbumArt = tracks[i].image[1]["#text"];
+    
     var htmlTrackRow =
       "<div class='row track'>" +
         "<div class='col-xs-1 col-xs-offset-1 play-button'>" +
@@ -38,10 +40,9 @@ Trackster.renderTracks = function(tracks) {
          "<div class='col-xs-2'>" + tracks[i].listeners + "</div>" +
       "</div>";
 
-      var mediumAlbumArt = tracks[i].image[1]["#text"];
-
-      console.log(tracks.length);
-      console.log(tracks[i].name + " " + tracks[i].artist + " " + tracks[i].listeners);
+      //console.log(tracks.length);
+      //console.log(tracks[i].name + " " + tracks[i].artist + " " + tracks[i].listeners);
+      //console.log(mediumAlbumArt);
 
       $("#track-list").append(htmlTrackRow);
   }
