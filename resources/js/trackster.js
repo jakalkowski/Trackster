@@ -3,7 +3,11 @@ var Trackster = {};
 const API_KEY = "525697adce8c37fb7c6fbecddf2e874a";
 
 $(document).on("click", "#search-button", function(){
-  Trackster.searchTracksByTitle($("#search-input").val());
+  // Search tracks if any characters are in the search field
+  if ($("#search-input").val().length > 0) {
+    Trackster.searchTracksByTitle($("#search-input").val());
+  }
+
   //console.log("Song list.")
 
   //$.ajax({url: "http://ws.audioscrobbler.com/2.0/?method=track.search&track=tiny&api_key=525697adce8c37fb7c6fbecddf2e874a&format=json",
@@ -11,6 +15,20 @@ $(document).on("click", "#search-button", function(){
           //success: function(){$("#search-input").html(console.log($("#search-input").val()))}
   //})
 
+});
+
+/*
+  Use the "Return" key, a.k.a. "Enter", to submit user search when a user finishes typing in the search box.
+*/
+
+$(document).ready(function(){
+  $("#search-input").keydown(function(keyEvent){
+    // check if enter (keyCode 13) is pressed. If anything in search field, search
+    if (keyEvent.keyCode == 13 && $("#search-input").val().length > 0){
+      Trackster.searchTracksByTitle($("#search-input").val());
+      console.log(keyEvent);
+    };
+  });
 });
 
 
@@ -37,7 +55,7 @@ Trackster.renderTracks = function(tracks) {
          "<div class='col-xs-4'>" + tracks[i].name + "</div>" +
          "<div class='col-xs-2'>" + tracks[i].artist + "</div>" +
          "<div class='col-xs-2'><img src='" + mediumAlbumArt + "'></div>" +
-         "<div class='col-xs-2'>" + tracks[i].listeners + "</div>" +
+         "<div class='col-xs-2'>" + numeral(tracks[i].listeners).format("0,0") + "</div>" +
       "</div>";
 
       console.log(tracks.length);
