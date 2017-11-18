@@ -2,9 +2,12 @@ var Trackster = {};
 
 const API_KEY = "525697adce8c37fb7c6fbecddf2e874a";
 
+/* Hide search animation when document is loaded. */
 $(document).ready(function(){
   $(".animation").hide();
 });
+
+/* Initiate search using search button */
 
 $(document).on("click", "#search-button", function(){
   // Search tracks if any characters are in the search field
@@ -15,7 +18,6 @@ $(document).on("click", "#search-button", function(){
   }
 
   //console.log("Song list.")
-
   //$.ajax({url: "http://ws.audioscrobbler.com/2.0/?method=track.search&track=tiny&api_key=525697adce8c37fb7c6fbecddf2e874a&format=json",
           //datatype: 'jsonp',
           //success: function(){$("#search-input").html(console.log($("#search-input").val()))}
@@ -24,9 +26,9 @@ $(document).on("click", "#search-button", function(){
 });
 
 /*
-  Use the "Return" key, a.k.a. "Enter", to submit user search when a user finishes typing in the search box.
+  Use the "Return" key, a.k.a. "Enter", to submit user search when a user
+  finishes typing in the search box.
 */
-
 $(document).ready(function(){
   $("#search-input").keydown(function(keyEvent){
     // check if enter (keyCode 13) is pressed. If anything in search field, search
@@ -38,7 +40,6 @@ $(document).ready(function(){
     };
   });
 });
-
 
 /*
   Given an array of track data, create the HTML for a Bootstrap row for each.
@@ -52,15 +53,16 @@ Trackster.renderTracks = function(tracks) {
   $("#search-animation").removeClass("animated rubberBand");
   setTimeout(function(){
     $(".animation").hide();
-  }, 700)
+  }, 700);
 
   for (i = 0; i <= tracks.length - 1 ; i++){
+
     var mediumAlbumArt = tracks[i].image[1]["#text"];
 
     var htmlTrackRow =
       "<div class='row track'>" +
         "<div class='col-xs-1 col-xs-offset-1 play-button'>" +
-          "<a href='#' target='_blank'>" +
+          "<a href='" + tracks[i].url + "' target='_blank'>" +
             "<i class='fa fa-play-circle-o fa-2x'></i>" +
           "</a>" +
          "</div>" +
@@ -98,6 +100,6 @@ Trackster.searchTracksByTitle = function(title) {
             console.log("Oops, something went wrong!")
             console.log(err)
           }
-  })
+  });
 
-}
+};
