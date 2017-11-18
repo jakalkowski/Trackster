@@ -2,10 +2,16 @@ var Trackster = {};
 
 const API_KEY = "525697adce8c37fb7c6fbecddf2e874a";
 
+$(document).ready(function(){
+  $(".animation").hide();
+});
+
 $(document).on("click", "#search-button", function(){
   // Search tracks if any characters are in the search field
   if ($("#search-input").val().length > 0) {
     Trackster.searchTracksByTitle($("#search-input").val());
+    $("#search-animation").addClass("animated rubberBand");
+    $(".animation").show();
   }
 
   //console.log("Song list.")
@@ -27,6 +33,8 @@ $(document).ready(function(){
     if (keyEvent.keyCode == 13 && $("#search-input").val().length > 0){
       Trackster.searchTracksByTitle($("#search-input").val());
       console.log(keyEvent);
+      $("#search-animation").addClass("animated rubberBand");
+      $(".animation").show();
     };
   });
 });
@@ -41,6 +49,8 @@ Trackster.renderTracks = function(tracks) {
   console.log(tracks)
 
   $("#track-list").empty();
+  $("#search-animation").removeClass("animated rubberBand");
+  $(".animation").hide();
 
   for (i = 0; i <= tracks.length - 1 ; i++){
     var mediumAlbumArt = tracks[i].image[1]["#text"];
