@@ -50,7 +50,9 @@ Trackster.renderTracks = function(tracks) {
 
   $("#track-list").empty();
   $("#search-animation").removeClass("animated rubberBand");
-  $(".animation").hide();
+  setTimeout(function(){
+    $(".animation").hide();
+  }, 700)
 
   for (i = 0; i <= tracks.length - 1 ; i++){
     var mediumAlbumArt = tracks[i].image[1]["#text"];
