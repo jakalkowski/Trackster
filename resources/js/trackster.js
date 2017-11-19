@@ -66,10 +66,10 @@ Trackster.renderTracks = function(tracks) {
             "<i class='fa fa-play-circle-o fa-2x'></i>" +
           "</a>" +
          "</div>" +
-         "<div class='col-xs-4'>" + tracks[i].name + "</div>" +
-         "<div class='col-xs-2'>" + tracks[i].artist + "</div>" +
+         "<div class='col-xs-4 name'>" + tracks[i].name + "</div>" +
+         "<div class='col-xs-2 artist'>" + tracks[i].artist + "</div>" +
          "<div class='col-xs-2'><img src='" + mediumAlbumArt + "'></div>" +
-         "<div class='col-xs-2'>" + numeral(tracks[i].listeners).format("0,0") + "</div>" +
+         "<div class='col-xs-2 listeners'>" + numeral(tracks[i].listeners).format("0,0") + "</div>" +
       "</div>";
 
       console.log(tracks.length);
@@ -77,7 +77,41 @@ Trackster.renderTracks = function(tracks) {
       console.log(mediumAlbumArt);
 
       $("#track-list").append(htmlTrackRow);
+
   }
+
+  /*
+  Allow the user to sort the columns by any attribute of the track information by
+  clicking on the corresponding column.
+  */
+  //console.log($(".name")[0].textContent)
+
+
+  // NAME SORTING
+
+  var names = []
+  for (x = 0; x < $(".name").length; x++) {
+    names.push($(".name")[x].textContent)
+  }
+
+  console.log(names)
+
+  names.sort()
+
+  console.log(names)
+
+  // LISTENER SORTING
+
+  var listeners = []
+  for (x = 0; x < $(".listeners").length; x++) {
+    listeners.push(numeral($(".listeners")[x].textContent).format("0"))
+  }
+
+  console.log(listeners)
+
+  listeners.sort( (a,b) => a-b )
+
+  console.log(listeners)
 
 };
 
