@@ -98,6 +98,19 @@ Trackster.renderTracks = function(tracks) {
 
   console.log(names)
 
+  // ARTIST SORTING
+
+  var artists = []
+  for (x = 0; x < $(".artist").length; x++) {
+    artists.push($(".artist")[x].textContent)
+  }
+
+  console.log(artists)
+
+  artists.sort()
+
+  console.log(artists)
+
   // LISTENER SORTING
 
   var listeners = []
