@@ -84,8 +84,6 @@ Trackster.renderTracks = function(tracks) {
   Allow the user to sort the columns by any attribute of the track information by
   clicking on the corresponding column.
   */
-  //console.log($(".name")[0].textContent)
-
 
   // NAME SORTING
 
