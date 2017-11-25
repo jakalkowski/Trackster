@@ -25,6 +25,10 @@ $(document).on("click", "#search-button", function(){
 
 });
 
+//$(document).on("click", "#song", function(){
+  //names.sort();
+//});
+
 /*
   Use the "Return" key, a.k.a. "Enter", to submit user search when a user
   finishes typing in the search box.
@@ -76,6 +80,8 @@ Trackster.renderTracks = function(tracks) {
       console.log(tracks[i].name + " " + tracks[i].artist + " " + tracks[i].listeners);
       console.log(mediumAlbumArt);
 
+      //$("#track-list").data("name", []);
+
       $("#track-list").append(htmlTrackRow);
 
   }
@@ -87,42 +93,65 @@ Trackster.renderTracks = function(tracks) {
 
   // NAME SORTING
 
-  var names = []
-  for (x = 0; x < $(".name").length; x++) {
-    names.push($(".name")[x].textContent)
-  }
+  $("#song").click(
+    function(){
 
-  console.log(names)
+      var names = []
+      for (x = 0; x < $(".name").length; x++) {
+        names.push($(".name")[x].textContent)
+      };
 
-  names.sort()
+      console.log(names);
 
-  console.log(names)
+      names.sort();
+
+      console.log(names);
+
+      //console.log($(".name").val(["x"].textContent));
+      //console.log($("#track-list").data("name"));
+      console.log($(".name")
+      .sort((a, b) => "$('.name').innerHTML_a"
+      .localeCompare("$('.name').innerHTML_b")
+       )
+      );
+      //console.log("hallo");
+
+    }
+  );
 
   // ARTIST SORTING
 
-  var artists = []
-  for (x = 0; x < $(".artist").length; x++) {
-    artists.push($(".artist")[x].textContent)
-  }
+  $("#artist").click(
+    function(){
 
-  console.log(artists)
+      var artists = []
+      for (x = 0; x < $(".artist").length; x++) {
+        artists.push($(".artist")[x].textContent)
+      };
 
-  artists.sort()
+      console.log(artists);
 
-  console.log(artists)
+      artists.sort();
+
+      console.log(artists);
+    }
+  );
 
   // LISTENER SORTING
+  $("#listeners").click(
+    function(){
+      var listeners = []
+      for (x = 0; x < $(".listeners").length; x++) {
+        listeners.push(numeral($(".listeners")[x].textContent).format("0"))
+      };
 
-  var listeners = []
-  for (x = 0; x < $(".listeners").length; x++) {
-    listeners.push(numeral($(".listeners")[x].textContent).format("0"))
-  }
+      console.log(listeners);
 
-  console.log(listeners)
+      listeners.sort( (a,b) => a-b );
 
-  listeners.sort( (a,b) => a-b )
-
-  console.log(listeners)
+      console.log(listeners);
+    }
+  );
 
 };
 
