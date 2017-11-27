@@ -1,4 +1,5 @@
 var Trackster = {};
+var $tracks = []
 
 const API_KEY = "525697adce8c37fb7c6fbecddf2e874a";
 
@@ -24,10 +25,6 @@ $(document).on("click", "#search-button", function(){
   //})
 
 });
-
-//$(document).on("click", "#song", function(){
-  //names.sort();
-//});
 
 /*
   Use the "Return" key, a.k.a. "Enter", to submit user search when a user
@@ -80,78 +77,9 @@ Trackster.renderTracks = function(tracks) {
       console.log(tracks[i].name + " " + tracks[i].artist + " " + tracks[i].listeners);
       console.log(mediumAlbumArt);
 
-      //$("#track-list").data("name", []);
-
       $("#track-list").append(htmlTrackRow);
 
   }
-
-  /*
-  Allow the user to sort the columns by any attribute of the track information by
-  clicking on the corresponding column.
-  */
-
-  // NAME SORTING
-
-  $("#song").click(
-    function(){
-
-      var names = []
-      for (x = 0; x < $(".name").length; x++) {
-        names.push($(".name")[x].textContent)
-      };
-
-      console.log(names);
-
-      names.sort();
-
-      console.log(names);
-
-      //console.log($(".name").val(["x"].textContent));
-      //console.log($("#track-list").data("name"));
-      console.log($(".name")
-      .sort((a, b) => "$('.name').innerHTML_a"
-      .localeCompare("$('.name').innerHTML_b")
-       )
-      );
-      //console.log("hallo");
-
-    }
-  );
-
-  // ARTIST SORTING
-
-  $("#artist").click(
-    function(){
-
-      var artists = []
-      for (x = 0; x < $(".artist").length; x++) {
-        artists.push($(".artist")[x].textContent)
-      };
-
-      console.log(artists);
-
-      artists.sort();
-
-      console.log(artists);
-    }
-  );
-
-  // LISTENER SORTING
-  $("#listeners").click(
-    function(){
-      var listeners = []
-      for (x = 0; x < $(".listeners").length; x++) {
-        listeners.push(numeral($(".listeners")[x].textContent).format("0"))
-      };
-
-      console.log(listeners);
-
-      listeners.sort( (a,b) => a-b );
-
-      console.log(listeners);
-    }
-  );
 
 };
 
@@ -168,7 +96,9 @@ Trackster.searchTracksByTitle = function(title) {
           //success: function(){$("#search-input").html(console.log($("#search-input").val()))}
           success: function(response){
             //console.log("Liste: " + response.results.trackmatches.track)
-            Trackster.renderTracks(response.results.trackmatches.track)
+            //save tracks in global object
+            $tracks = response.results.trackmatches.track
+            Trackster.renderTracks($tracks)
           },
           error: function(err) {
             console.log("Oops, something went wrong!")
@@ -177,3 +107,20 @@ Trackster.searchTracksByTitle = function(title) {
   });
 
 };
+
+/*
+Allow the user to sort the columns by any attribute of the track information by
+clicking on the corresponding column.
+*/
+
+$(document).on("click", "#song", function(){
+  Trackster.renderTracks($tracks.sort( (a,b) => a.name.localeCompare(b.name)))
+})
+
+$(document).on("click", "#artist", function(){
+  Trackster.renderTracks($tracks.sort( (a,b) => a.artist.localeCompare(b.artist)))
+})
+
+$(document).on("click", "#listeners", function(){
+  Trackster.renderTracks($tracks.sort( (a,b) => b.listeners - a.listeners))
+})
